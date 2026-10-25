@@ -1,0 +1,30 @@
+<button
+  matFab
+  [extended]="titleDisplay() !== 'none'"
+  [matMenuTriggerFor]="themeMenu"
+  [aria-label]="`Change theme. Current theme: ${theme()}`"
+>
+  @if (titleDisplay() !== 'none') {
+    {{ theme() | titlecase }}
+  }
+  @if (titleDisplay() === 'end') {
+    <mat-icon iconPositionEnd>{{ selectedModeIcon() }}</mat-icon>
+  } @else {
+    <mat-icon>{{ selectedModeIcon() }}</mat-icon>
+  }
+</button>
+
+<mat-menu #themeMenu="matMenu">
+  <button mat-menu-item aria-label="System Default" (click)="setTheme('system')">
+    <mat-icon>routine</mat-icon>
+    <span>System ({{ prefersDark ? 'Dark' : 'Light' }})</span>
+  </button>
+  <button mat-menu-item aria-label="Light Mode" (click)="setTheme('light')">
+    <mat-icon>light_mode</mat-icon>
+    <span>Light</span>
+  </button>
+  <button mat-menu-item aria-label="Dark Mode" (click)="setTheme('dark')">
+    <mat-icon>dark_mode</mat-icon>
+    <span>Dark</span>
+  </button>
+</mat-menu>

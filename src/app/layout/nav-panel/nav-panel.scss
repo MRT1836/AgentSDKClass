@@ -1,0 +1,33 @@
+@use '@angular/material' as mat;
+
+$padding-y: 24px;
+$padding-2y: $padding-y * 2;
+
+:host {
+  display: flex;
+  height: calc(100dvh - $padding-2y);
+  flex-direction: column;
+  padding: $padding-y 20px;
+  align-items: center;
+  background: var(--mat-sys-surface-container-low);
+
+  /* prettier-ignore */
+  @include mat.list-overrides((
+    active-indicator-shape: 6px,
+  ));
+}
+
+mat-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+header {
+  margin-bottom: 16px;
+}
+
+footer {
+  margin-top: auto;
+}
