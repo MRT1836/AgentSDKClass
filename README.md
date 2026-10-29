@@ -1,111 +1,102 @@
-# Angular Demo Project
+# NxExample
 
-An evolving Angular demonstration application for experimenting with modern Angular patterns, Angular Material, theming, and data visualization.
+This project was generated using [Nx](https://nx.dev).
 
-The application currently provides a responsive dashboard shell with navigation, light, dark, and system theme options, and an accessible ECharts horizontal bar chart displaying sample product-category data. The dashboard and not-found pages are loaded lazily through the Angular router.
+<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
 
-You can test out the demo here: https://derekkrause.github.io/angular-demo-project/dashboard
+🔎 **Powerful, Extensible Dev Tools**
 
-## Architecture Decisions
-- Angular v22
-- Standalone Architecture
-- Signals-first state management
-- Native Angular APIs / minimal third-party packages
-- Smart/presentational component boundaries
-- API services separated from application state
-- Testing Strategy
-- ECharts isolated behind application-owned components with
-  bundle size minimized using the tree-shakeable interface
-- Upgradeability as an explicit architectural requirement
+## Quick Start & Documentation
 
-## Technology
+[Nx Documentation](https://nx.dev)
 
-- Angular 22.0.7
-- Angular CLI and build tooling 22.0.7
-- Angular Material and CDK 22.0.5
-- TypeScript 6.0.3
-- Apache ECharts 6.1.0
-- RxJS 7.8.2
-- Vitest 4.1.10
-- pnpm 11.15.1
+[30-minute video showing all Nx features](https://nx.dev/getting-started/what-is-nx)
 
-The authoritative dependency declarations are in [`package.json`](./package.json), with exact resolved versions recorded in [`pnpm-lock.yaml`](./pnpm-lock.yaml).
+[Interactive Tutorial](https://nx.dev/tutorial/01-create-application)
 
-## Getting started
+## Adding capabilities to your workspace
 
-This project uses pnpm 11.15.1. With pnpm installed globally, install dependencies with:
+Nx supports many plugins which add capabilities for developing different types of applications and different tools.
 
-```bash
-pnpm install
-```
+These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
 
-Start the local development server with:
+Below are our core plugins:
 
-```bash
-pnpm start
-```
+- [React](https://reactjs.org)
+  - `npm install --save-dev @nx/react`
+- Web (no framework frontends)
+  - `npm install --save-dev @nx/web`
+- [Angular](https://angular.io)
+  - `npm install --save-dev @nx/angular`
+- [Nest](https://nestjs.com)
+  - `npm install --save-dev @nrwl/nest`
+- [Express](https://expressjs.com)
+  - `npm install --save-dev @nrwl/express`
+- [Node](https://nodejs.org)
+  - `npm install --save-dev @nrwl/node`
 
-The development server opens the application at `http://localhost:4200/` and reloads when source files change.
+There are also many [community plugins](https://nx.dev/community) you could add.
 
-## Development commands
+## Generate an application
 
-Run a development build (the default):
+Run `nx g @nx/react:app my-app` to generate an application.
 
-```bash
-pnpm build
-```
+> You can use any of the plugins above to generate applications as well.
 
-Run an optimized production build:
+When using Nx, you can create multiple applications and libraries in the same workspace.
 
-```bash
-pnpm build:prod
-```
+## Generate a library
 
-Watch and rebuild using either configuration:
+Run `nx g @nx/react:lib my-lib` to generate a library.
 
-```bash
-pnpm watch
-pnpm watch:prod
-```
+> You can also use any of the plugins above to generate libraries as well.
 
-Development uses `src/environments/environment.ts`. Production replaces it with
-`src/environments/environment.prod.ts` through Angular CLI file replacements.
-Both currently use the same public FDA API; the two configurations demonstrate
-environment selection rather than separate deployed backends. `pnpm start` also
-defaults to development. The GitHub Pages workflow explicitly selects production.
+Libraries are shareable across libraries and applications. They can be imported from `@nx-example/mylib`.
 
-Run unit tests:
+## Development server
 
-```bash
-pnpm test
-```
+Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-Use `pnpm test:run` for a single run. See the [behavioral test coverage guide](./docs/testing.md)
-for the interactions covered and remaining browser checks. The suite uses Vitest.
+## Code scaffolding
 
-Run lint checks:
+Run `nx g @nx/react:component my-component --project=my-app` to generate a new component.
 
-```bash
-pnpm lint
-```
+## Build
 
-Check formatting:
+Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-```bash
-pnpm format:check
-```
+## Running unit tests
 
-Generate an Angular artifact:
+Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
 
-```bash
-pnpm ng generate component component-name
-```
+Run `nx affected:test` to execute the unit tests affected by a change.
 
-For the available schematics and options, run `pnpm ng generate --help`.
+## Running end-to-end tests
 
-## Additional resources
+Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
 
-See the [application review and improvement plan](./docs/angular-review.md) for
-the current verification results and prioritized next steps.
+Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
 
-See the [Angular CLI documentation](https://angular.dev/tools/cli) for complete command guidance.
+## Understand your workspace
+
+Run `nx dep-graph` to see a diagram of the dependencies of your projects.
+
+## Further help
+
+Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## ☁ Nx Cloud
+
+### Computation Caching in the Cloud
+
+<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+
+Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
+
+Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+
+[Nx Cloud](https://nx.app/)
+
+[Computation Caching Fundamentals](https://blog.nrwl.io/computation-caching-the-fundamentals-behind-nxs-lightning-fast-execution-dc761fe41eb8)
+
+[Computation Caching with NX](https://nx.dev/latest/core-concepts/computation-caching)

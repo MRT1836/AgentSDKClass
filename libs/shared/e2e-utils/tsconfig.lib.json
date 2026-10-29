@@ -1,0 +1,12 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "out-tsc/lib",
+    "rootDir": "src",
+    "typeRoots": ["../../../node_modules/@types", "../../../node_modules"],
+    "types": ["cypress"],
+    "tsBuildInfoFile": "out-tsc/lib/tsconfig.lib.tsbuildinfo"
+  },
+  "exclude": ["**/*.spec.ts"],
+  "include": ["src/**/*.ts"]
+}

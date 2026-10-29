@@ -1,8 +1,6 @@
-dist
-coverage
-.angular
-.claude
-node_modules
-AGENTS.md
-README.md
-package-lock.json
+# Add files here to ignore them from prettier formatting
+
+/.nx/cache
+/.angular
+/.nx/workspace-data
+.nx/self-healing

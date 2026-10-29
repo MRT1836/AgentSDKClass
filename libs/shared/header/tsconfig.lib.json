@@ -1,0 +1,16 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "out-tsc/lib",
+    "rootDir": "src",
+    "types": [],
+    "tsBuildInfoFile": "out-tsc/lib/tsconfig.lib.tsbuildinfo"
+  },
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "jest.config.ts"],
+  "include": ["src/**/*.ts"],
+  "references": [
+    {
+      "path": "../jsxify/tsconfig.lib.json"
+    }
+  ]
+}

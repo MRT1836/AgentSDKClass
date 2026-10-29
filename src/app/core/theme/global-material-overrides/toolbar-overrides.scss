@@ -1,8 +1,0 @@
-@use '@angular/material' as mat;
-
-html {
-  /* prettier-ignore */
-  @include mat.toolbar-overrides((
-    container-background-color: var(--mat-sys-surface-container-low),
-  ));
-}

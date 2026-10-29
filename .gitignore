@@ -1,28 +1,63 @@
-# Angular specific
-/dist/
-/out-tsc/
-/tmp/
-/coverage/
-/e2e/test-output/
-/.angular/
-.angular/
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# Node modules and dependency files
-/node_modules/
-/package-lock.json
-/yarn.lock
+# compiled output
+/dist
+/tmp
+out-tsc
 
-# Environment files
-/.env
+# dependencies
+/node_modules
+/.yarn/*
+!/.yarn/patches
 
-# Angular CLI and build artefacts
-/.angular-cli.json
-/.ng/
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-# TypeScript cache
-*.tsbuildinfo
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# misc
+/.angular/cache
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+.nx/cache
+.nx/workspace-data
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
+
+.claude/settings.local.json
+.claude/worktrees
+.nx/polygraph
+
+.nx/self-healing
+.nx/migrate-runs
+# MSBuild output for apps/products-api.
+bin/
+obj/
+
+# The generated TypeScript client is a build artifact, not a source.
+# `nx codegen shared-product-types` writes it from the OpenAPI document that
+# `nx build ProductsApi` emits into obj/, and the Nx Cloud agents have a .NET
+# SDK (see .nx/workflows/agents.yaml) so CI regenerates both.
+libs/shared/product/types/src/generated/

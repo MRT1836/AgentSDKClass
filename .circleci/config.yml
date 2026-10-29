@@ -1,0 +1,66 @@
+version: 2.1
+
+orbs:
+  nx: nrwl/nx@1.6.2
+  node: circleci/node@5.3.0
+
+deploy_cache: &deploy_cache
+  key: last-deploy-sha
+
+jobs:
+  main:
+    docker:
+      - image: cimg/node:lts-browsers
+    environment:
+      # Record and hash tasks with Nx Cloud I/O snapshots (ultracache).
+      NX_CLOUD_USE_ULTRACACHE: 'true'
+    steps:
+      - checkout
+
+      # Connect your workspace on nx.app and uncomment this to enable task distribution.
+      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
+      - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js-dotnet" --stop-agents-after="e2e-ci"
+
+      - run:
+          name: Enable Corepack
+          command: sudo corepack enable
+
+      - run:
+          name: Install .NET SDK
+          command: |
+            curl -sSL https://dot.net/v1/dotnet-install.sh \
+              | bash /dev/stdin --channel 10.0 --install-dir "$HOME/.dotnet"
+            echo 'export DOTNET_ROOT="$HOME/.dotnet"' >> "$BASH_ENV"
+            echo 'export PATH="$HOME/.dotnet:$PATH"' >> "$BASH_ENV"
+
+      - node/install-packages:
+          pkg-manager: yarn
+      - nx/set-shas:
+          main-branch-name: 'master'
+      - restore_cache:
+          <<: *deploy_cache
+
+      - run: yarn nx-cloud record -- nx format:check --base=$NX_BASE --head=$NX_HEAD
+      - run: yarn nx affected --base=$NX_BASE --head=$NX_HEAD -t lint,test,build,typecheck,e2e-ci --parallel 4
+      # `deploy` runs with `--no-agents`, so `ProductsApi:build` executes here
+      # rather than on an agent. The preceding step downloads that task's
+      # cached outputs from the agent that ran it, and `obj` is one of them, so
+      # the agent's `project.assets.json` lands here pointing at NuGet paths
+      # that only exist on the agent. Restore after that download, not before,
+      # or `dotnet build --no-restore` fails with NETSDK1064.
+      - run:
+          name: Restore .NET projects
+          command: dotnet restore apps/products-api/ProductsApi.csproj
+      - run: yarn nx affected --base=$NX_BASE --head=$NX_HEAD -t deploy --no-agents
+      - run: git rev-parse HEAD > dist/last-deploy.txt
+      - save_cache:
+          key: last-deploy-sha
+          paths:
+            - dist/last-deploy.txt
+
+workflows:
+  version: 2
+
+  ci:
+    jobs:
+      - main

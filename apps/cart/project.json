@@ -1,0 +1,35 @@
+{
+  "name": "cart",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cart/src",
+  "projectType": "application",
+  "generators": {},
+  "targets": {
+    "build": {
+      "outputs": ["{workspaceRoot}/dist/apps/cart"],
+      "dependsOn": ["..."],
+      "inputs": [
+        "...",
+        {
+          "dependentTasksOutputFiles": "**/*"
+        }
+      ]
+    },
+    "deploy": {
+      "dependsOn": ["build"],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx ts-node --project tools/tsconfig.tools.json tools/scripts/deploy --siteName nrwl-nx-examples-cart --outputPath dist/apps/cart"
+          }
+        ]
+      }
+    },
+    "serve": {
+      "dependsOn": ["..."]
+    }
+  },
+  "tags": ["type:app", "scope:cart"],
+  "implicitDependencies": ["shared-assets", "shared-styles"]
+}
